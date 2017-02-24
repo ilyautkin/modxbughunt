@@ -144,9 +144,10 @@ Clear your cache.
 We've got 2 workflows worked out for you: bug fixing (doing development yourself) and testing (if you're not that much into developing, but do want to help).
 
 ## 6A. Bug fixing workflow
-1. Pick an issue from the [MODX issue tracker](https://github.com/modxcms/revolution/issues)
-2. Prevent duplicate work by claiming it by commenting on it. Something along the lines of: "I'm going to try and fix this today."
-3. Next, create a branch from your current development branch (2.5.x), to start working in your own environment.
+### 1. Pick an issue from the [MODX issue tracker](https://github.com/modxcms/revolution/issues)
+### 2. Prevent duplicate work by claiming it by commenting on it.
+Something along the lines of: "I'm going to try and fix this today."
+### 3. Next, create a branch from your current development branch (2.5.x), to start working in your own environment.
 
 If the issue you want to fix is a feature, name it feature-ISSUENUMBER. If it is a bug, name it bug-ISSUENUMBER. In this example we'll fix a broken link in the docs. The issue can be [found here](https://github.com/modxcms/revolution/issues/13309). It has issue number 13309.
 
@@ -190,7 +191,8 @@ Branch bug-13309 set up to track remote branch bug-13309 from origin.
 
 That's it for the command line! Now we need to head over to Github to make a Pull Request (PR).
 
-7. Go to your fork on Github. You'll probably see a message resembling something like ```Your recently pushed branches: bug-13309 (2 minutes ago)```. Click the "compare & pull request" button.
+### 4. Go to your fork on Github
+You'll probably see a message resembling something like ```Your recently pushed branches: bug-13309 (2 minutes ago)```. Click the "compare & pull request" button.
 
 Now you see two repositories being compared. On the left, there is ```modxcms/revolution```, set it to ```base: 2.5.x```. On the right you'll see ```yourname/revolution``` with ```bug-13309```.
 
@@ -201,7 +203,8 @@ Please make sure you enter some explanation about your commit for our beloved in
 Once you've did this, click the magic button **Create pull request**
 
 Congratulations, you did it!
-8. On to the next one! If you want to fix another bug, we first need to be on the ```2.5.x``` branch again. To do this, we first want to make sure that our Fork's ```2.5.x``` branch is in sync with the original ```modxcms/2.5.x``` branch. Do the following to accomplish this:
+### 5. On to the next one!
+If you want to fix another bug, we first need to be on the ```2.5.x``` branch again. To do this, we first want to make sure that our Fork's ```2.5.x``` branch is in sync with the original ```modxcms/2.5.x``` branch. Do the following to accomplish this:
 ```
 $ git fetch upstream 2.5.x
 $ git fetch origin 2.5.x
@@ -213,15 +216,18 @@ If in the last step, you get a text editor with a merge message. Just save and q
 
 You now have updated your Fork. Next you can go back to step 1 in 6a. Rinse and repeat!
 
-## 5B. Test workflow
-1. Pick a pull request from the current [PR-list on Github](https://github.com/modxcms/revolution/pulls).
-2. Read the PR and check if this is something you might be able to test. Check if the issue is still existent and you can reproduce in the current development branch:
+## 6B. Test workflow
+### 1. Pick a pull request
+Pick a pull request from the current [PR-list on Github](https://github.com/modxcms/revolution/pulls).
+### 2. Read the PR
+Read the PR and check if this is something you might be able to test. Check if the issue is still existent and you can reproduce in the current development branch:
 ```
 $ git checkout 2.5.x
 ```
 
 If you can reproduce it, comment in the PR that you are going to test it. If you can't reproduce it, mention that as-well and mention the user who made the PR.
-3. To pull this PR, you need to add the fork of the PR-owner to your remotes. In this example I'm using a random PR. In this case, one by goldsky. In hte example below, you'll see the 'git remote add goldsky' part. 'goldsky' is the name of remote. This can be anything, but we recommend to use the Git-username to make it easy to remember. The 'goldsky:patch-ellipsis' part is the Github-URL of Goldsky's modxcms-fork.
+### 3. Get the PR locally
+To pull this PR, you need to add the fork of the PR-owner to your remotes. In this example I'm using a random PR. In this case, one by goldsky. In hte example below, you'll see the 'git remote add goldsky' part. 'goldsky' is the name of remote. This can be anything, but we recommend to use the Git-username to make it easy to remember. The 'goldsky:patch-ellipsis' part is the Github-URL of Goldsky's modxcms-fork.
 
 After adding the remote, fetch it and checkout the PR-branch. In this case ```patch-ellipsis```.
 
@@ -233,9 +239,11 @@ Branch patch-ellipsis set up to track remote branch patch-ellipsis from goldsky.
 Switched to a new branch 'patch-ellipsis'
 ```
 
-4. Clear both your MODX and browser cache
-5. Test whether the bug is really fixed or not
-6. Is it fixed? Let the integrators and fixer know by mentioning them in your comment. Not fixed? Let the fixer know by mentioning him in a comment.
+### 4. Clear both your MODX and browser cache
+### 5. Test whether the bug is really fixed or not
+### 6. Is it fixed or not?
+Is it fixed? Let the integrators and fixer know by mentioning them in your comment.
+Not fixed? Let the fixer know by mentioning him in a comment.
 
 ## Problems, issues, help needed?
 Just ask in the [MODX Community Slack #development](https://modx.org/) or on the [MODX Community Forums](https://forums.modx.com/).
