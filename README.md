@@ -212,7 +212,7 @@ Read the PR and check if this is something you might be able to test. Check if t
 $ git checkout 2.5.x
 ```
 
-If you can reproduce it, comment in the PR that you are going to test it. If you can't reproduce it, mention that as-well and mention the user who made the PR.
+If you can reproduce it, comment in the PR that you are going to test it. If you can't reproduce it, mention that as-well and mention the user who made the PR. Don't forget to mention the #modxbughunt tag in your comment.
 ### 3. Get the PR locally
 To pull this PR, you need to add the fork of the PR-owner to your remotes. In this example I'm using a random PR. In this case, one by goldsky. In hte example below, you'll see the 'git remote add goldsky' part. 'goldsky' is the name of remote. This can be anything, but we recommend to use the Git-username to make it easy to remember. The 'goldsky:patch-ellipsis' part is the Github-URL of Goldsky's modxcms-fork.
 
@@ -229,8 +229,10 @@ Switched to a new branch 'patch-ellipsis'
 ### 4. Clear both your MODX and browser cache
 ### 5. Test whether the bug is really fixed or not
 ### 6. Is it fixed or not?
-Is it fixed? Let the integrators and fixer know by mentioning them in your comment.
+Is it fixed? Let the integrators and fixer know by mentioning them in your comment. 
 Not fixed? Let the fixer know by mentioning him in a comment.
+
+Don't forget to mention the #modxbughunt tag in your comment.
 
 ## Problems, issues, help needed?
 Just ask in the [MODX Community Slack #development](https://modx.org/) or on the [MODX Community Forums](https://forums.modx.com/).
