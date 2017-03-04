@@ -109,7 +109,6 @@ use_alias_path    => Yes
 publish_default   => Yes
 cache_disabled    => Yes
 ```
-
 Вы можете так же удалить расширение .html у типа содержимого HTML. Настройка типов содержимого доступна в верхнем меню админки (Содержимое → Типы содержимого) Это необязательно, но мы предпочитаем, чтобы у страниц не было расширения .html.
 
 Очистите кеш сайта.
@@ -125,16 +124,14 @@ cache_disabled    => Yes
 Можно написать что-то вроде этого: ```I'm going to try and fix this today``` _(Я попробую пофиксить это сегодня)_
 ### 3. После этого создавайте новую ветку из вашей текущей ветки разработки (2.5.x), чтобы работать уже в своём собственном окружении.
 
-If the issue you want to fix is a feature, name it feature-ISSUENUMBER. If it is a bug, name it bug-ISSUENUMBER. In this example we'll fix a broken link in the docs. The issue can be [found here](https://github.com/modxcms/revolution/issues/13309). It has issue number 13309.
+Если проблема, которую вы собираетесь решить, это фича, называйте ветку feature-ISSUENUMBER. Если это баг, то, соответственно, bug-ISSUENUMBER. Например, мы хотим починить битую ссылку в документах. Описание этой проблемы находится [здесь](https://github.com/modxcms/revolution/issues/13309). Её номер — 13309.
 
 ```
 $ git checkout -b bug-13309
 ```
+Теперь исправяем этот баг и меняем некоторый код. Если вы уверены в сделанных изменениях, нужно будет отправить их обратно на Github. В нашем примере мы редактировали файл ```core/lexicon/en/about.inc.php```
 
-Next, we'll fix our issue and change some code. If you're confident about your changes, we want to commit it back to Github. We changed the file ```core/lexicon/en/about.inc.php```
-
-Before doing this, we need to check if git is only trying to commit the files you had in mind. Sometimes, another file you don't know of is added to your repo.
-
+Перед отправкой проверьте, что git видит изменения только тех файлов, которые вы действительно редактировали.
 ```
 $ git status
 On branch bug-13309
@@ -146,8 +143,7 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
-
-If the files you want added to MODX are also in the status-report above, you did well. You're all set! We need to add it to our commit and push it to our online fork on Github. Use the hashtag to reference the issue and/or to tag it for stuff like the MODX Bug Hunt.
+Если файлы, которые нужно отправить, появились в этом списке, значит, вы всё сделали правильно. Теперь мы готовы добавить эти файлы в коммит и отправить его в наш онлайн репозиторий на Github. Указывайте номер решённой проблемы с помощью хештега. Так же можно указать другие теги, например, в рамках MODX Bug Hunt будет использоваться хештег ```#modxbughunt```.
 
 ```
 $ git add .
@@ -164,44 +160,42 @@ To github.com:gpsietzema/revolution.git
  * [new branch]      bug-13309 -> bug-13309
 Branch bug-13309 set up to track remote branch bug-13309 from origin.
 ```
+Вот и всё, для чего нам нужна командная строка. Теперь заходим на сайт Github, чтобы создать пулл-реквест (PR).
 
-That's it for the command line! Now we need to head over to Github to make a Pull Request (PR).
+### 4. Зайдите на страницу вашего форка на Github
+Скорее всего, вы увидете уведомление ```Your recently pushed branches: bug-13309 (2 minutes ago)``` (Вы недавно отправили ветки: bug-13309). Нажмите «compare & pull request».
 
-### 4. Go to your fork on Github
-You'll probably see a message resembling something like ```Your recently pushed branches: bug-13309 (2 minutes ago)```. Click the "compare & pull request" button.
+Теперь вы видете сравнение двух репозиториев. Слева ```modxcms/revolution```, ветка ```base: 2.5.x```. Справа ```yourname/revolution``` ветка ```bug-13309```.
 
-Now you see two repositories being compared. On the left, there is ```modxcms/revolution```, set it to ```base: 2.5.x```. On the right you'll see ```yourname/revolution``` with ```bug-13309```.
+Если всё нормально, будет показано уведомление ```Able to merge. These branches can be automatically merged.``` (Доступно слияние. Эти ветки могут быть автоматически объеденены).
 
-If everything is fine, you'll notice a message stating the following: ```Able to merge. These branches can be automatically merged.```.
+Пожалуйтса, оставьте описание своего коммита для наших любимых интеграторов (это люди, которые будут вносить изменения, которые вы предложили, в исходный код MODX). Так им будет проще протестировать ваш коммит.
 
-Please make sure you enter some explanation about your commit for our beloved integrators (the people who will actually merge your code into MODX). This will make it easier for them to test it.
+После того, как всё это сделано, нажимаем на волшебную кнопку **Create pull request**
 
-Once you've did this, click the magic button **Create pull request**
+Поздравляем! Вы сделали это!
 
-Congratulations, you did it!
-### 5. On to the next one!
-If you want to fix another bug, we first need to be on the ```2.5.x``` branch again. To do this, we first want to make sure that our Fork's ```2.5.x``` branch is in sync with the original ```modxcms/2.5.x``` branch. Do the following to accomplish this:
+### 5. К новым вершинам!
+Если вы хотите пофиксить ещё один баг, нужно переключиться обратно на ветку ```2.5.x```. Чтобы сделать это, нужно проверить, что ветка ```2.5.x``` нашего форка синхронизирована с оригинальной веткой ```modxcms/2.5.x```. Выполните следующие команды в командной строке:
 ```
 $ git fetch upstream 2.5.x
 $ git fetch origin 2.5.x
 $ git checkout 2.5.x
 $ git pull upstream 2.5.x
 ```
+Если после выполнения последней команды открылся редактор с сообщением о слиянии (merge), просто сохраните и выйдите из редактора. Если у вас VI, нажмите Escape, чтобы выйти из текстового режима, после чего введите ```:wq``` и нажмите Enter.
 
-If in the last step, you get a text editor with a merge message. Just save and quit the editor and you are all fine. If this editor is VI, just hit Escape to exit type-mode, then type ```:wq``` and hit enter.
+Теперь ваш форк обновлён и вы можете вернуться к шагу № 1 в пункте 6a. Повторять до достижения удовлетворения!
 
-You now have updated your Fork. Next you can go back to step 1 in 6a. Rinse and repeat!
-
-## 6B. Test workflow
-### 1. Pick a pull request
-Pick a pull request from the current [PR-list on Github](https://github.com/modxcms/revolution/pulls).
-### 2. Read the PR
-Read the PR and check if this is something you might be able to test. Check if the issue is still existent and you can reproduce in the current development branch:
+## 6B. Как тестировать
+### 1. Выберите пулл-реквест
+Выберите пулл-реквест из актуального [списка на Github](https://github.com/modxcms/revolution/pulls).
+### 2. Прочтите PR
+Прочтите PR и решите, сможете ли вы его протестировать. Проверьте, что проблема действительно до сих пор существует и вы можете воспроизвести её в ветке, которая сейчас в разработке:
 ```
 $ git checkout 2.5.x
 ```
-
-If you can reproduce it, comment in the PR that you are going to test it. If you can't reproduce it, mention that as-well and mention the user who made the PR. Don't forget to mention the #modxbughunt tag in your comment.
+Если у вас получилось воспроизвести проблему, отметьте что вы собираетесь протестировать пулл-реквест в комментарии к нему. Если проблему воспроизвести не получилось, отметьте это в комментарии, упомянув пользователя, который отправил этот пулл-реквест. Не забудьте добавить хештег #modxbughunt в комментарий (если работа проводится в рамках этого мероприятия).
 ### 3. Get the PR locally
 To pull this PR, you need to add the fork of the PR-owner to your remotes. In this example I'm using a random PR. In this case, one by goldsky. In hte example below, you'll see the 'git remote add goldsky' part. 'goldsky' is the name of remote. This can be anything, but we recommend to use the Git-username to make it easy to remember. The 'goldsky:patch-ellipsis' part is the Github-URL of Goldsky's modxcms-fork.
 
