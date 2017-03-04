@@ -1,70 +1,60 @@
-# Contributors guide MODX Bug Hunt
-More information about the MODX Bug Hunt can be found on the [modxbughunt.com website](http://www.modxbughunt.com).
+# Как стать контрибьютором MODX (руководство по отлову багов)
+Это руководство написано для участников MODX Bug Hunt. Мероприятие уже завершено, если вы его пропустили, информацию можно найти [на официальном сайте modxbughunt.com](http://www.modxbughunt.com).
 
-## 1. Tools
-- A command line interface (Terminal/iTerm/etc)
-- Git on your system
-- PHP Storm or other client. Please just make sure you use 4 spaces, instead of tabs.
-- Some sort of webserver. Apache or NGINX preferred. We use Vagrant boxes, but you might also use [MAMP](https://www.mamp.info/en/)/[XAMPP](https://www.apachefriends.org/index.html).
+## 1. Инструменты
+- Интерфейс с командной строкой (Терминал, iTerm и пр.)
+- Git, установленный на вашей системе
+- PHP Storm или другой клиент. Пожалуйста, убедитесь, что вы используете 4 пробела для отступов, а не табы.
+- Любой веб-сервер. Желательно, чтобы на борту был Apache или NGINX. Мы используем Vagrant. Или можно взять на вооружение [MAMP](https://www.mamp.info/en/) или [XAMPP](https://www.apachefriends.org/index.html).
 
 ## 2. Github
-- You'll need a Github account which can be made on [Github.com](https://github.com/)
-- Then you need a fork of MODX Revolution. Go [here](https://github.com/modxcms/revolution) and click 'Fork' on the top-right.
+- Вам понадобится аккаунт на [Github.com](https://github.com/)
+- После регистрации сделайте форк MODX Revolution. Для этого нажмите кнопку «Fork» на странице [https://github.com/modxcms/revolution](https://github.com/modxcms/revolution) в правом верхнем углу.
 
-## 3. Signed MODX Contributors License Agreement
-You need to sign a Contributors License Agreement before contributing code. If you haven't signed it before, [sign it here](https://develop.modx.com/contribute/cla/). 
+## 3. Примите условия лицензионного соглашения
+Чтобы ваш код, мог стать частью MODX, нужно принять условия Contributors License Agreement. Если вы этого еще не сделали, [прочитайте его и заполните анкету](https://develop.modx.com/contribute/cla/). 
 
-## 4. Setting up MODX files from a Git repository
-First, clone your Fork on your local machine, into the directory which will be your webroot.
+## 4. Получение файлов MODX из репозитория
+Сначала склонируйте ваш форк к себе на локальную машину (в корень сайта).
 
-**Please note:** in the examples below, you'll notice SSH-url's (git@github.com:modxcms/revolution.git). Github also offers HTTPS-links, which are easier to use if you're a newbie (https://github.com/modxcms/revolution.git). You can simply replace them in the examples.
-
+**Примечание:** в примерах ниже используются SSH-адреса репозиториев (такие — git@github.com:modxcms/revolution.git). Но Github поддерживает ещё и HTTPS-ссылки, которые легче в понимании для новичков (это такие ссылки — https://github.com/modxcms/revolution.git). Вы можете просто заменить их в примерах.
 ```
 $ git clone git@github.com:modxcms/revolution.git
 $ cd revolution
 ```
-
-Next, add the original modxcms/revolution reposition as your upstream. We'll discuss the use of this later. Right now, just do it.
-
+Далее, свяжите ваш локальный репозиторий с оригинальным modxcms/revolution. Зачем это надо, увидим позже, сейчас просто сделайте это.
 ```
 $ git remote add upstream git@github.com:modxcms/revolution.git
 ```
-
-Now we need to checkout (read: download) the current development-branch, which is ```2.5.x``` at the time of writing.
-
+Теперь нужно переключится (читай «скачать») текущую ветку, для разработки. На текущий момет это ```2.5.x```.
 ```
 $ git checkout 2.5.x
 ```
-
-Make sure your repository is still 'clean'. Make sure you haven't made any changes.
-
+Убедитесь, что ваш репозиторий всё ещё чист (что вы не вносили в него никаких изменений).
 ```
 $ git status
 On branch 2.5.x
 Your branch is up-to-date with 'origin/2.5.x'.
 nothing to commit, working tree clean
 ```
+Если вы видете такое сообщение, значит, всё сделано правильно. Если вы видете какие-то изменения, это прям плохо-плохо! Попробуйте сделать всё с нуля и не изменять никаких файлов до этого этапа. Иначе ваш коммит испортит репозиторий MODX.
 
-If you see the above message, you're totally fine. If you do see changes, you've done something horribly wrong! Make sure it is clean and you've made no changes to files yet. Otherwise your commits will mess up the MODX repository later on.
+Дальше мы должны сделать кое-что странное. Git-версия MODX отличается от дистрибутива, который доступен для скачивания с сайта MODX. Нам нужно собрать его вручную.
 
-Next we'll have to do something weird. The git-version of MODX doesn't contain a pre-built core, like the regular MODX download does. We need to build this manually.
-
-Cd into the _build-folder and make sure you're there ;-) You can do this by using the 'pwd' command. It will show the current path.
-
+Перейдите в папку ```_build``` и убедитесь, что вы действительно в ней. Например, при помощи команды _pwd_, которая показывает путь к текущей папке.
 ```
 $ cd _build
 $ pwd
 /your-absolute-path-here/revolution/_build
 ```
-
-Next, we need to copy (DO NOT RENAME THEM) the following 2 files:
+Дальше копируем (НЕ переименовываем, а именно копируем) 2 файла:
 ```
 $ cp build.config.sample.php build.config.php
 $ cp build.properties.sample.php build.properties.php
 ```
-Typically you don't have to change the contents of these files, they just need to exist there.
+В эти файлы не нужно будет вносить изменений, они просто должны существовать.
 
-The next step requires you to have PHP in your path. Check if you have PHP in your path by doing the following:
+Следующим шагом нужно убедиться, что в вашей папке доступен PHP. Сделать это можно следующей командой::
 ```
 $ php -v
 PHP 7.0.15 (cli) (built: Jan 22 2017 08:51:45) ( NTS )
@@ -72,7 +62,7 @@ Copyright (c) 1997-2017 The PHP Group
 Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
 ```
 
-**If you do not get something like the above, please ask someone or Google on how to get it installed.**
+**Если ваша система выдала ответ, непохожий на такое сообщение, установите и настройте PHP. Google вам в помощь.**
 
 To build the MODX-core, do the following from within the _build-folder:
 ```
