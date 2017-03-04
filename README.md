@@ -54,7 +54,7 @@ $ cp build.properties.sample.php build.properties.php
 ```
 В эти файлы не нужно будет вносить изменений, они просто должны существовать.
 
-Следующим шагом нужно убедиться, что в вашей папке доступен PHP. Сделать это можно следующей командой::
+Следующим шагом нужно убедиться, что в вашей папке доступен PHP. Сделать это можно следующей командой:
 ```
 $ php -v
 PHP 7.0.15 (cli) (built: Jan 22 2017 08:51:45) ( NTS )
@@ -64,7 +64,7 @@ Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
 
 **Если ваша система выдала ответ, непохожий на такое сообщение, установите и настройте PHP. Google вам в помощь.**
 
-To build the MODX-core, do the following from within the _build-folder:
+Чтобы собрать дистрибутив, запустите transport.core.php в папке ```_build```:
 ```
 $ php transport.core.php
 [2017-02-24 11:52:17] (INFO @ transport.core.php) Beginning build script processes...
@@ -95,15 +95,14 @@ $ php transport.core.php
 
 Execution time: 1.5657 s
 ```
+Если будут какие-то ошибки, связанные с timezone, ничего страшного — это неважно. Главное здесь — сообщение "Transport zip created. Build script finished.". Если его нет, придётся повозиться, разобраться. Спрашивайте у старших товарищей.
 
-If the above shows you some random timezone-issues, it doesn't matter. The important thing is: you need the message "Transport zip created. Build script finished.". If it doesn't, ask around.
+## 5. Выполняем установку MODX
+Теперь, когда все файлы на месте, нам осталось запустить установку MODX. Не забудьте создать базу данных и обязательно используйте везде кодировку _utf8_unicode_ci_.
 
-## 5. Performing the MODX setup
-Now we've got all files in place, we just need to run the MODX Setup. Make sure you have a database ready and use the character set 'utf8_unicode_ci'.
+Запустите установку, но **НЕ УДАЛЯЙТЕ папку setup**. В админке будет сообщение с советом удалить её — просто игнорируйте это сообщение. Если эту папку удалить, ваш коммит сломает репозиторий MODX.
 
-Run your setup and be sure that you **DO NOT remove the setup-folder**. Just leave it there and ignore the annoying red suggestion to remove it. If you do remove it, you'll mess up the MODX repository in your next commit.
-
-After installing, change the following System Settings:
+После установки поменяйте следующие системные настройки:
 ```
 friendly_urls     => Yes
 use_alias_path    => Yes
@@ -111,20 +110,20 @@ publish_default   => Yes
 cache_disabled    => Yes
 ```
 
-Optional (but we prefer no .html-extensions). Change the Content-Type of HTML. Remove the .html File extension. You can do this by clicking "Content" in the top MODX menu and then clicking 'Content Types'.
+Вы можете так же удалить расширение .html у типа содержимого HTML. Настройка типов содержимого доступна в верхнем меню админки (Содержимое → Типы содержимого) Это необязательно, но мы предпочитаем, чтобы у страниц не было расширения .html.
 
-Clear your cache.
+Очистите кеш сайта.
 
-**Also, setup some random content, so you can do some serious testing.***
+**Наполните сайт каким-нибудь контентом***
 
-## 6. Workflows
-We've got 2 workflows worked out for you: bug fixing (doing development yourself) and testing (if you're not that much into developing, but do want to help).
+## 6. Рабочий процесс
+Вклад можно осуществить двуми способами: фиксить баги (собственно, сам процесс разработки) и тестировать (если вы ещё не готовы писать код, но хотите помочь).
 
-## 6A. Bug fixing workflow
-### 1. Pick an issue from the [MODX issue tracker](https://github.com/modxcms/revolution/issues)
-### 2. Prevent duplicate work by claiming it by commenting on it.
-Something along the lines of: "I'm going to try and fix this today."
-### 3. Next, create a branch from your current development branch (2.5.x), to start working in your own environment.
+## 6A. Как фиксить баги
+### 1. Выбирайте проблему из [баг-трекера MODX](https://github.com/modxcms/revolution/issues)
+### 2. Чтобы вы не делали одну работу с кем-то ещё, оставьте комментарий к проблеме.
+Можно написать что-то вроде этого: ```I'm going to try and fix this today``` _(Я попробую пофиксить это сегодня)_
+### 3. После этого создавайте новую ветку из вашей текущей ветки разработки (2.5.x), чтобы работать уже в своём собственном окружении.
 
 If the issue you want to fix is a feature, name it feature-ISSUENUMBER. If it is a bug, name it bug-ISSUENUMBER. In this example we'll fix a broken link in the docs. The issue can be [found here](https://github.com/modxcms/revolution/issues/13309). It has issue number 13309.
 
