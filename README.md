@@ -196,10 +196,10 @@ $ git pull upstream 2.5.x
 $ git checkout 2.5.x
 ```
 Если у вас получилось воспроизвести проблему, отметьте что вы собираетесь протестировать пулл-реквест в комментарии к нему. Если проблему воспроизвести не получилось, отметьте это в комментарии, упомянув пользователя, который отправил этот пулл-реквест. Не забудьте добавить хештег #modxbughunt в комментарий (если работа проводится в рамках этого мероприятия).
-### 3. Get the PR locally
-To pull this PR, you need to add the fork of the PR-owner to your remotes. In this example I'm using a random PR. In this case, one by goldsky. In hte example below, you'll see the 'git remote add goldsky' part. 'goldsky' is the name of remote. This can be anything, but we recommend to use the Git-username to make it easy to remember. The 'goldsky:patch-ellipsis' part is the Github-URL of Goldsky's modxcms-fork.
+### 3. Скачайте PR на локальную машину
+Чтобы скачать PR, вам нужно связать свой репозиторий с репозиторием автора пулл-реквеста. В этом примере используется ненастоящий PR. Его сделал некто goldsky. В примере ниже есть такая часть: ```git remote add goldsky```. Здесь ```goldsky``` — это название связи. Оно может быть любым, но мы рекоммендуем использовать имя пользователя с Github, чтобы было меньше путаницы.
 
-After adding the remote, fetch it and checkout the PR-branch. In this case ```patch-ellipsis```.
+После добавления связи скачайте ветку пулл-реквеста и переключитесь на неё. В примере ветка — это ```patch-ellipsis```.
 
 ```
 $ git remote add goldsky git@github.com:goldsky/revolution.git
@@ -209,13 +209,13 @@ Branch patch-ellipsis set up to track remote branch patch-ellipsis from goldsky.
 Switched to a new branch 'patch-ellipsis'
 ```
 
-### 4. Clear both your MODX and browser cache
-### 5. Test whether the bug is really fixed or not
-### 6. Is it fixed or not?
-Is it fixed? Let the integrators and fixer know by mentioning them in your comment. 
-Not fixed? Let the fixer know by mentioning him in a comment.
+### 4. Очистите кеш MODX и кеш своего браузера
+### 5. Протестируйте, действительно ли баг исправлен
+### 6. Исправлен или нет?
+Баг исправлен? Укажите это в комментарии, чтобы об этом знали интеграторы и автор пулл-реквеста.
+Не исправлен? Донесите это до сведения автора, оставив комментарий к пулл-реквесту.
 
-Don't forget to mention the #modxbughunt tag in your comment.
+Не забудьте про хештег #modxbughunt в ваших комментариях.
 
-## Problems, issues, help needed?
-Just ask in the [MODX Community Slack #development](https://modx.org/) or on the [MODX Community Forums](https://forums.modx.com/).
+## Возникла какая-то проблема или нужна помощь?
+Задайте свой вопрос в сообществе [MODX Community Slack #development](https://modx.org/) или на [форуме сообщества MODX](https://forums.modx.com/).
